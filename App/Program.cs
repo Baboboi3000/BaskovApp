@@ -37,15 +37,15 @@ while (true)
 
         baskovHandler.AddBaskov(baskovInput);
     }
-    else if (action == "users delite")
+    else if (action == "users delete")
     {
         Console.WriteLine("Введите имя и возраст");
         var name = Console.ReadLine();
         var age = int.Parse(Console.ReadLine());
 
-        var baskovInput = new BaskovInput(name, age);
-
-        baskovHandler.Remove(baskovInput);
+        var baskovDelete = new BaskovDelete(name, age);
+        
+        baskovHandler.DeliteBaskov(baskovDelete);
     }
     else
     {

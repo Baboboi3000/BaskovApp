@@ -16,5 +16,9 @@ public class BaskovMemoryRepository : IBaskovRepository
         return _baskov;
     }
     
+    public void Remove(Baskov baskov)
+    {
+        _baskov.Remove(baskov);
+    }
 }
 

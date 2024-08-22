@@ -5,6 +5,8 @@ namespace Core.Handlers;
 public record BaskovInput(string Name, int Age);
 public record BaskovOutput(string Name, int Age, DateTime Created);
 
+public record BaskovDelete(string Name, int Age);
+
 public class BaskovHandler
 {
     private readonly IBaskovRepository _baskovrepository;
@@ -34,6 +36,15 @@ public class BaskovHandler
     {
         var baskov = _baskovrepository.GetAll();
         return baskov.Select(baskov => new BaskovOutput(baskov.Name, baskov.Age, baskov.Created)).ToList();
+    }
+    public void DeliteBaskov(BaskovDelete baskovDelete)
+    {
+        var baskov = new Baskov
+        {
+            Name = baskovDelete.Name,
+            Age = baskovDelete.Age,
+        };
+        _baskovrepository.Remove(baskov);
     }
 }
 
