@@ -11,7 +11,7 @@ while (true)
     if(action == "get")
     {
         var baskov = baskovHandler.GetAll();
-        if (baskov == null || baskov.Count = 0)
+        if (baskov == null || baskov.Count == 0)
         {
             Console.WriteLine("Пользователей нет");
             Console.WriteLine();
