@@ -4,12 +4,16 @@ using System.ComponentModel.Design;
 IBaskovRepository baskovRepository = new BaskovMemoryRepository();
 BaskovHandler baskovHandler = new(baskovRepository);
 
+Console.WriteLine("Пользователи - users");
+Console.WriteLine("Создать пользователя - create");
+Console.WriteLine("Удалить пользователя - delete");
+Console.WriteLine("Получить всех пользователей - get");
 while (true)
 {
     var action = Console.ReadLine().ToLower().Trim();
     Console.WriteLine();
 
-    if (action == "get")
+    if (action == "users get")
     {
         var baskov = baskovHandler.GetAll();
         if (baskov == null || baskov.Count == 0)
@@ -23,7 +27,7 @@ while (true)
             Console.WriteLine($"{item.Name} {item.Age} {item.Created}");
         }
     }
-    else if (action == "add")
+    else if (action == "users create")
     {
         Console.WriteLine("Введите имя и возраст");
         var name = Console.ReadLine();
@@ -32,6 +36,10 @@ while (true)
         var baskovInput = new BaskovInput(name, age);
 
         baskovHandler.AddBaskov(baskovInput);
+    }
+    else if (action == "users delite")
+    {
+        
     }
     else
     {
