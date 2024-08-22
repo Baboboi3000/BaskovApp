@@ -39,7 +39,13 @@ while (true)
     }
     else if (action == "users delite")
     {
-        
+        Console.WriteLine("Введите имя и возраст");
+        var name = Console.ReadLine();
+        var age = int.Parse(Console.ReadLine());
+
+        var baskovInput = new BaskovInput(name, age);
+
+        baskovHandler.Remove(baskovInput);
     }
     else
     {

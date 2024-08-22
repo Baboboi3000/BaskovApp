@@ -15,5 +15,6 @@ public class BaskovMemoryRepository : IBaskovRepository
     {
         return _baskov;
     }
+    
 }
 

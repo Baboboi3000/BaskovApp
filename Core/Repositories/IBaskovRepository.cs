@@ -5,5 +5,6 @@ namespace Core.Repository;
 {
     void Add (Baskov baskov);
     List<Baskov> GetAll ();
+
 }
 

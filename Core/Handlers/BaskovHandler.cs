@@ -1,4 +1,6 @@
-﻿namespace Core.Handlers;
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace Core.Handlers;
 
 public record BaskovInput(string Name, int Age);
 public record BaskovOutput(string Name, int Age, DateTime Created);
