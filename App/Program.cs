@@ -15,7 +15,7 @@ var equal = user1.Equals(user2);
 var equal2 = user1 == user2;
 
 IUserRepository userRepository = new UserMemoryRepository();
-UserHandler baskovHandler = new(userRepository);
+UserHandler userHandler = new(userRepository);
 
 Console.WriteLine("Пользователи - users");
 Console.WriteLine("Создать пользователя - create");
@@ -28,14 +28,14 @@ while (true)
 
     if (action == "users get")
     {
-        var baskov = baskovHandler.GetAll();
-        if (baskov == null || baskov.Count == 0)
+        var user = userHandler.GetAll();
+        if (user == null || user.Count == 0)
         {
             Console.WriteLine("Пользователей нет");
             Console.WriteLine();
             continue;
         }
-        foreach (var item in baskov)
+        foreach (var item in user)
         {
             Console.WriteLine($"Id: {item.Id} Имя: {item.Name} Возраст: {item.Age} Время создания: {item.Created}");
         }
@@ -46,18 +46,18 @@ while (true)
         var name = Console.ReadLine();
         var age = int.Parse(Console.ReadLine());
 
-        var baskovInput = new UserInput(name, age);
+        var userInput = new UserInput(name, age);
 
-        baskovHandler.AddUser(baskovInput);
+        userHandler.AddUser(userInput);
     }
     else if (action == "users delete")
     {
         Console.WriteLine("Введите Id");
         var id = int.Parse(Console.ReadLine());
 
-        var baskovDelete = new UserDelete(id);
+        var userDelete = new UserDelete(id);
 
-        baskovHandler.DeliteUser(baskovDelete);
+        userHandler.DeliteUser(userDelete);
     }
     else
     {
