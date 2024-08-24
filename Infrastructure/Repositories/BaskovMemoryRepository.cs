@@ -2,23 +2,23 @@
 
 namespace Infrastructure.Repositories;
 
-public class BaskovMemoryRepository : IBaskovRepository
+public class UserMemoryRepository : IUserRepository
 {
-    private readonly List<Baskov> _baskov = [];
+    private readonly List<User> _user = [];
 
-    public void Add(Baskov baskov)
+    public void Add(User user)
     {
-        _baskov.Add(baskov);
+        _user.Add(user);
     }
 
-    public List<Baskov> GetAll()
+    public List<User> GetAll()
     {
-        return _baskov;
+        return _user;
     }
     
-    public void Remove(Baskov baskov)
+    public void Remove(User user)
     {
-        _baskov.Remove(baskov);
+        _user.Remove(user);
     }
 }
 

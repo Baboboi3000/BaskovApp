@@ -1,11 +1,11 @@
 ﻿using Core.Entities;
 
 namespace Core.Repository;
- public interface IBaskovRepository
+public interface IUserRepository
 {
-    void Add (Baskov baskov);
-    List<Baskov> GetAll ();
+    void Add(User user);
+    List<User> GetAll();
 
-    void Remove(Baskov baskov);
+    void Remove(User user);
 }
 
