@@ -1,5 +1,7 @@
 ﻿using Core.Entities;
 using Core.Handlers;
+using Core.Repositories;
+using Infrastructure;
 using System.ComponentModel.Design;
 var user1 = new User
 {
@@ -14,13 +16,23 @@ var user2 = new User
 var equal = user1.Equals(user2);
 var equal2 = user1 == user2;
 
-IUserRepository userRepository = new UserMemoryRepository();
+JsonContext memoryContext = JsonContext.GetInstance();
+
+IUserRepository userRepository = new UserMemoryRepository(memoryContext);
+IItemRepository itemRepository = new ItemMemoryRepository(memoryContext);
+
 UserHandler userHandler = new(userRepository);
+ItemHandler itemHandler = new(itemRepository);
 
 Console.WriteLine("Пользователи - users");
 Console.WriteLine("Создать пользователя - create");
 Console.WriteLine("Удалить пользователя - delete");
 Console.WriteLine("Получить всех пользователей - get");
+Console.WriteLine("Предметы - items");
+Console.WriteLine("Добавить предмет - add");
+Console.WriteLine("Получить все предметы - get");
+Console.WriteLine("Добавить предмет к пользователю - add users");
+
 while (true)
 {
     var action = Console.ReadLine().ToLower().Trim();
@@ -58,6 +70,33 @@ while (true)
         var userDelete = new UserDelete(id);
 
         userHandler.DeliteUser(userDelete);
+    }
+    else if (action == "items add")
+    {
+        Console.WriteLine("Введите название предмета");
+        var name = Console.ReadLine();
+        var itemInput = new ItemInput(name);
+        var id = itemHandler.AddItem(itemInput);
+        Console.WriteLine("Id предмета" + id);
+    }
+    else if (action == "items get")
+    {
+        var items = itemHandler.GetAll();
+        if (items == null || items.Count == 0)
+        {
+            Console.WriteLine("Предметов нет");
+            Console.WriteLine();
+            continue;
+        }
+        foreach(var item in items)
+        {
+            Console.WriteLine($"Id: {item.Id}");
+        }
+    }
+    else if (action == "item add users")
+    {
+        var userId = int.Parse(Console.ReadLine()!);
+        var itemId = int.Parse(Console.ReadLine()!);
     }
     else
     {

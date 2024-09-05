@@ -1,24 +1,31 @@
-﻿using Core.Repository;
+﻿using Core.Entities;
+using Core.Repository;
 
 namespace Infrastructure.Repositories;
 
 public class UserMemoryRepository : IUserRepository
 {
-    private readonly List<User> _user = [];
+    private readonly JsonContext _context;
+
+    public UserMemoryRepository(JsonContext context)
+    {
+        _context = context;
+    }
 
     public void Add(User user)
     {
-        _user.Add(user);
+        _context.Users.Add(user);
+        _context.SaveChanges();
     }
 
     public List<User> GetAll()
     {
-        return _user;
+        return _context.Users;
     }
-    
+
     public void Remove(User user)
     {
-        _user.Remove(user);
+       return _context.Remove(user);
     }
 }
 
