@@ -25,7 +25,7 @@ public class UserMemoryRepository : IUserRepository
 
     public void Remove(User user)
     {
-       return _context.Remove(user);
+        _context.Users.Remove(user);
     }
 }
 

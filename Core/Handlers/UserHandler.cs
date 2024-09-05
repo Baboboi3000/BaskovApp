@@ -37,7 +37,7 @@ public class UserHandler
         var user = _userRepository.GetAll();
         return user.Select(user => new UserOutput(user.Id, user.Name, user.Age, user.Created)).ToList();
     }
-    public void DeliteUser(UserDelete userDelete)
+    public void DeleteUser(UserDelete userDelete)
     {
         var user = new User
         {

@@ -69,7 +69,7 @@ while (true)
 
         var userDelete = new UserDelete(id);
 
-        userHandler.DeliteUser(userDelete);
+        userHandler.DeleteUser(userDelete);
     }
     else if (action == "items add")
     {
