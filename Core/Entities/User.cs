@@ -6,7 +6,9 @@ public class User
     public int Age { get; set; }
     public DateTime Created { get; set; }
 
-    public override bool Equals(object? obj)
+    public List<Order> Orders { get; set; }
+
+public override bool Equals(object? obj)
     {
         var other = obj as User;
         return other.Id == Id;
