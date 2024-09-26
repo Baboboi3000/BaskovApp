@@ -26,5 +26,5 @@ Console.WriteLine("Добавить предмет - add");
 Console.WriteLine("Получить все предметы - get");
 Console.WriteLine("Добавить предмет к пользователю - add users");
 Console.ReadLine();
-UsersApp.Pipisa();   // тут я пытался вызвать методы из ItemApp и UserApp
+UsersApp.Pipisa();
 ItemsApp.Sisa();
