@@ -16,8 +16,9 @@ public class OrderHandler
     }
     public void AddUserAndItemToOrder()
     {
-        
-        User user = new User(); // воткнуть хуйню для вытаскивания юзера и айтемов по id
+        _userRepository.GetAll().First(x => x.Id == 1);
+        _itemRepository.GetAll().First(x => x.Id == 1);
+        User user = new User();
         Item item = new Item();
 
         Order order = new Order { Id = 1, User = user };

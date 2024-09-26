@@ -1,9 +1,4 @@
-﻿using App;
-using Core.Entities;
-using Core.Handlers;
-using Core.Repositories;
-using Infrastructure;
-using System.ComponentModel.Design;
+﻿
 var user1 = new User
 {
     Id = 1,
@@ -26,5 +21,31 @@ Console.WriteLine("Добавить предмет - add");
 Console.WriteLine("Получить все предметы - get");
 Console.WriteLine("Добавить предмет к пользователю - add users");
 Console.ReadLine();
-UsersApp.Pipisa();
-ItemsApp.Sisa();
+var userApp = new UsersApp();
+var itemApp = new ItemsApp();
+
+while (true)
+{
+
+    try
+    {
+        bool isAccess = false;
+        var action = Console.ReadLine().ToLower().Trim();
+
+        isAccess = userApp.Pipisa(action);
+        if (isAccess)
+            continue;
+        isAccess = itemApp.Sisa(action);
+        if (!isAccess)
+        {
+            Console.WriteLine("Ебобо?");
+            continue;
+        }
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine("ОШИБКА" + ex.Message);
+        continue;
+    }
+}
+

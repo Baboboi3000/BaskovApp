@@ -1,41 +1,35 @@
-﻿using Core.Handlers;
-using Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace App
 {
-    public class UsersApp   // создать метод
+    public class UsersApp  
     {
-        public static void Pipisa()
+        JsonContext _memoryContext;
+
+        IUserRepository _userRepository;
+
+        UserHandler _userHandler;
+        public UsersApp()
         {
-            JsonContext memoryContext = JsonContext.GetInstance();
-
-            IUserRepository userRepository = new UserMemoryRepository(memoryContext);
-
-            UserHandler userHandler = new(userRepository);
+            _memoryContext = new JsonContext();
+            _userRepository = new UserMemoryRepository(_memoryContext);
+            _userHandler = new(_userRepository);
+        }
+        public bool Pipisa(string action)
+        {
+           
             while (true)
             {
-                var action = Console.ReadLine().ToLower().Trim();
-
-
+               
                 if (action == "users get")
                 {
-                    var user = userHandler.GetAll();
+                    var user = _userHandler.GetAll();
                     if (user == null || user.Count == 0)
                     {
                         Console.WriteLine("Пользователей нет");
                         Console.WriteLine();
                         continue;
                     }
-                    foreach (var item in user)
-                    {
-                        Console.WriteLine($"Id: {item.Id} Имя: {item.Name} Возраст: {item.Age} Время создания: {item.Created}");
-                    }
+                    
                 }
                 else if (action == "users create")
                 {
@@ -45,7 +39,7 @@ namespace App
 
                     var userInput = new UserInput(name, age);
 
-                    userHandler.AddUser(userInput);
+                    _userHandler.AddUser(userInput);
                 }
                 else if (action == "users delete")
                 {
@@ -54,14 +48,9 @@ namespace App
 
                     var userDelete = new UserDelete(id);
 
-                    userHandler.DeleteUser(userDelete);
+                    _userHandler.DeleteUser(userDelete);
                 }
-                else
-                {
-                    Console.WriteLine("ебобо?");
-                    continue;
-                }
-                Console.WriteLine();
+                
             }
         }
     }

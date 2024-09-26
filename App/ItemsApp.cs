@@ -1,40 +1,36 @@
-﻿using Core.Handlers;
-using Core.Repositories;
-using Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
-
+﻿
 namespace App
 {
     public class ItemsApp
     {
-        public static void Sisa()
+        JsonContext _memoryContext;
+
+        IItemRepository _itemRepository;
+
+        ItemHandler _itemHandler;
+        public ItemsApp()
         {
-            JsonContext memoryContext = JsonContext.GetInstance();
-
-            IItemRepository itemRepository = new ItemMemoryRepository(memoryContext);
-
-            ItemHandler itemHandler = new(itemRepository);
+            _memoryContext = new JsonContext();
+            _itemRepository = new ItemMemoryRepository(_memoryContext);
+            _itemHandler = new(_itemRepository);
+        }
+        public bool Sisa(string action)
+        {
 
             while (true)
             {
-                var action = Console.ReadLine().ToLower().Trim();
 
                 if (action == "items add")
                 {
                     Console.WriteLine("Введите название предмета");
                     var name = Console.ReadLine();
                     var itemInput = new ItemInput(name);
-                    var id = itemHandler.AddItem(itemInput);
+                    var id = _itemHandler.AddItem(itemInput);
                     Console.WriteLine("Id предмета" + id);
                 }
                 else if (action == "items get")
                 {
-                    var items = itemHandler.GetAll();
+                    var items = _itemHandler.GetAll();
                     if (items == null || items.Count == 0)
                     {
                         Console.WriteLine("Предметов нет");
@@ -51,12 +47,6 @@ namespace App
                     var userId = int.Parse(Console.ReadLine()!);
                     var itemId = int.Parse(Console.ReadLine()!);
                 }
-                else
-                {
-                    Console.WriteLine("ебобо?");
-                    continue;
-                }
-                Console.WriteLine();
 
             }
         }

@@ -1,2 +1,12 @@
 ﻿global using Core.Repository;
 global using Infrastructure.Repositories;
+global using Core.Handlers;
+global using Core.Repositories;
+global using App;
+global using Infrastructure;
+global using System;
+global using Core.Entities;
+global using System.Collections.Generic;
+global using System.Threading.Tasks;
+global using System.Linq;
+global using System.Text;
