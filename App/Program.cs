@@ -38,7 +38,7 @@ while (true)
         isAccess = itemApp.Sisa(action);
         if (!isAccess)
         {
-            Console.WriteLine("Ебобо?");
+            Console.WriteLine("Это была ошибка");
             continue;
         }
     }
