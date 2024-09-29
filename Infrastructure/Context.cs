@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Xml.Linq;
 
 namespace Infrastructure;
 
@@ -18,6 +19,7 @@ public class JsonContext
         {
             File.Create(_filePath).Close();
             _memoryContext = new JsonContext();
+            _memoryContext.SaveChanges();
             return _memoryContext;
         }
         else
