@@ -20,7 +20,6 @@ Console.WriteLine("Предметы - items");
 Console.WriteLine("Добавить предмет - add");
 Console.WriteLine("Получить все предметы - get");
 Console.WriteLine("Добавить предмет к пользователю - add users");
-Console.ReadLine();
 var userApp = new UsersApp();
 var itemApp = new ItemsApp();
 
@@ -32,10 +31,10 @@ while (true)
         bool isAccess = false;
         var action = Console.ReadLine().ToLower().Trim();
 
-        isAccess = userApp.Pipisa(action);
+        isAccess = userApp.Handle(action);
         if (isAccess)
             continue;
-        isAccess = itemApp.Sisa(action);
+        isAccess = itemApp.Handle(action);
         if (!isAccess)
         {
             Console.WriteLine("Это была ошибка");

@@ -10,15 +10,12 @@ namespace App
         ItemHandler _itemHandler;
         public ItemsApp()
         {
-            _memoryContext = new JsonContext();
+            _memoryContext =  JsonContext.GetInstance();
             _itemRepository = new ItemMemoryRepository(_memoryContext);
             _itemHandler = new(_itemRepository);
         }
-        public bool Sisa(string action)
+        public bool Handle(string action)
         {
-
-            while (true)
-            {
 
                 if (action == "items add")
                 {
@@ -27,6 +24,7 @@ namespace App
                     var itemInput = new ItemInput(name);
                     var id = _itemHandler.AddItem(itemInput);
                     Console.WriteLine("Id предмета" + id);
+                    return true;
                 }
                 else if (action == "items get")
                 {
@@ -35,20 +33,20 @@ namespace App
                     {
                         Console.WriteLine("Предметов нет");
                         Console.WriteLine();
-                        continue;
                     }
                     foreach (var item in items)
                     {
                         Console.WriteLine($"Id: {item.Id}");
                     }
+                    return true;
                 }
                 else if (action == "item add users")
                 {
                     var userId = int.Parse(Console.ReadLine()!);
                     var itemId = int.Parse(Console.ReadLine()!);
+                return true;
                 }
-
-            }
+                return false;
         }
     }
 }
