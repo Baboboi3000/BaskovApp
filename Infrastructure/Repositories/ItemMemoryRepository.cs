@@ -22,4 +22,8 @@ public class ItemMemoryRepository : IItemRepository
     {
         return _context.Items;
     }
+    public void Remove(Item item)
+    {
+        _context.Items.Remove(item);
+    }
 }

@@ -11,5 +11,6 @@ namespace Core.Repositories
         void Add(Item item);
 
         List<Item> GetAll();
+        void Remove(Item item);
     }
 }
