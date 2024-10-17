@@ -50,6 +50,7 @@ namespace App
                 var itemDelete = new ItemDelete(id);
 
                 _itemHandler.DeleteItem(itemDelete);
+                Console.WriteLine("Предмет успешно удален");
                 return true;
             }
             else if (action == "item add users")

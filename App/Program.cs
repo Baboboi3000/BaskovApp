@@ -31,8 +31,11 @@ Console.WriteLine("Добавить предмет - add");
 Console.WriteLine("Получить все предметы - get");
 Console.WriteLine("Удалить предмет - delete");
 Console.WriteLine("Добавить предмет к пользователю - add users");
+Console.WriteLine("Заказы - order");
+Console.WriteLine("Создать заказ - add");
 var userApp = new UsersApp();
 var itemApp = new ItemsApp();
+var orderApp = new OrderApp();
 
 while (true)
 {
@@ -46,6 +49,9 @@ while (true)
         if (isAccess)
             continue;
         isAccess = itemApp.Handle(action);
+        if (isAccess)
+            continue;
+        isAccess = orderApp.Handle(action);
         if (!isAccess)
         {
             Console.WriteLine("Это была ошибка");

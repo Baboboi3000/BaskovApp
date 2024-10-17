@@ -1,6 +1,5 @@
 ﻿using Core.Repositories;
 
-
 namespace Infrastructure.Repositories;
 
 public class ItemMemoryRepository : IItemRepository
@@ -25,5 +24,6 @@ public class ItemMemoryRepository : IItemRepository
     public void Remove(Item item)
     {
         _context.Items.Remove(item);
+        _context.SaveChanges();
     }
 }

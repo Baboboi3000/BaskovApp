@@ -1,10 +1,8 @@
-﻿using Core.Repositories;
-using Core.Repository;
+﻿using Core.Entities;
 
 namespace Core.Handlers;
 public record ItemInput(string Name);
 public record ItemOutput(int Id, string Name);
-public record AddItemToUser(int ItemId, int UserId);
 public record ItemDelete(int Id);
 
 public class ItemHandler
@@ -34,11 +32,6 @@ public class ItemHandler
         };
         _itemRepository.Add(item);
         return id;
-    }
-    public string AddItemToUser(AddItemToUser addItemToUser)
-    {
-         
-        return "Успешно добавлено";
     }
     public List<ItemOutput> GetAll()
     {

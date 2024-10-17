@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Core.Repositories;
 
-namespace Core.Repositories
+public interface IOrderRepository
 {
-    public interface IOrderRepository
-    {
-        void Add(Order order); 
+    void Add(Order order); 
 
-        List<Order> GetAll();
-    }
+    List<Order> GetAll();
 }

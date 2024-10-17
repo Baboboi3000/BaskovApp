@@ -44,6 +44,7 @@ namespace App
                 var userInput = new UserInput(name, age);
 
                 _userHandler.AddUser(userInput);
+                Console.WriteLine("Пользователь успешно создан");
                 return true;
             }
             else if (action == "users delete")
@@ -54,6 +55,7 @@ namespace App
                 var userDelete = new UserDelete(id);
 
                 _userHandler.DeleteUser(userDelete);
+                Console.WriteLine("Пользователь успешно удален");
                 return true;
             }
             return false;
