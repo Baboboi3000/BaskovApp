@@ -1,7 +1,4 @@
-﻿using Core.Entities;
-using Core.Repository;
-
-namespace Infrastructure.Repositories;
+﻿namespace Infrastructure.Repositories;
 
 public class UserMemoryRepository : IUserRepository
 {
@@ -26,6 +23,7 @@ public class UserMemoryRepository : IUserRepository
     public void Remove(User user)
     {
         _context.Users.Remove(user);
+        _context.SaveChanges();
     }
 }
 

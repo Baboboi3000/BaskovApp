@@ -1,9 +1,9 @@
-﻿using Core.Repositories;
+﻿using Core.Entities;
 
 namespace Core.Handlers;
 public record ItemInput(string Name);
 public record ItemOutput(int Id, string Name);
-public record AddItemToUser(int ItemId, int UserId);
+public record ItemDelete(int Id);
 
 public class ItemHandler
 {
@@ -33,16 +33,19 @@ public class ItemHandler
         _itemRepository.Add(item);
         return id;
     }
-    public string AddItemToUser(AddItemToUser addItemToUser)
-    {
-         
-        return "Успешно добавлено";
-    }
     public List<ItemOutput> GetAll()
     {
-        var drivers = _itemRepository.GetAll();
+        var items = _itemRepository.GetAll();
 
-        return drivers.Select(item => new ItemOutput(item.Id, item.Name)).ToList();
+        return items.Select(item => new ItemOutput(item.Id, item.Name)).ToList();
+    }
+    public void DeleteItem(ItemDelete itemDelete)
+    {
+        var item = new Item
+        {
+            Id = itemDelete.Id,
+        };
+        _itemRepository.Remove(item);
     }
 }
 
