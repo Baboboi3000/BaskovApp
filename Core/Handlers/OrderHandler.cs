@@ -1,9 +1,6 @@
-﻿using Core.Repositories;
-using System.Security.Cryptography.X509Certificates;
+﻿namespace Core.Entities;
 
-namespace Core.Entities;
-
-public record OrderCreate(string Name, int ItemId, int UserId);
+public record OrderCreate(string Name, List<int> ItemsIds, int UserId);
 public record OrderOutput(int Id, string Name);
 public class OrderHandler
 {
@@ -32,30 +29,29 @@ public class OrderHandler
             Id = id,
             Name = orderCreate.Name,
         };
+
+        // Поиск пользователя по ID
+        var userToAdd = _userRepository.GetAll().Find(user => user.Id == orderCreate.UserId);
+
+        if (userToAdd == null)
+        {
+            throw new Exception("Пользователь не найден!!!");
+        }
+
+        order.User = userToAdd;
+
+        // Поиск предмета в репозитории по ID
+        var itemToAdd = _itemRepository.GetAll().Where(x=>orderCreate.ItemsIds.Contains(x.Id));
+
+        if (itemToAdd != null)
+        {
+            order.Items.AddRange(itemToAdd);
+        }
+        
+
+
         _orderRepository.Add(order);
-        int userId;
-        if (int.TryParse(Console.ReadLine(), out userId))
-        {
-            // Поиск пользователя по ID
-            var userToAdd = _userRepository.GetAll().Find(user => user.Id == id);
-
-            if (userToAdd != null)
-            {
-                order.Users.Add(userToAdd);
-            }
-        }
-        int itemId;
-        if (int.TryParse(Console.ReadLine(), out itemId))
-        {
-            // Поиск предмета в репозитории по ID
-            var itemToAdd = _itemRepository.GetAll().Find(item => item.Id == id);
-
-            if (itemToAdd != null)
-            {
-                order.Items.Add(itemToAdd);
-            }
-        }
-            return order.Id;
+        return order.Id;
     }
     public List<OrderOutput> GetAll()
     {

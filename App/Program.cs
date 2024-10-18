@@ -60,7 +60,7 @@ while (true)
     }
     catch(Exception ex)
     {
-        Console.WriteLine("ОШИБКА" + ex.Message);
+        Console.WriteLine("ОШИБКА: " + ex.Message);
         continue;
     }
 }

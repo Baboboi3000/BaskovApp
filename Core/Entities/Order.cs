@@ -6,9 +6,9 @@ public class Order
 
     public string Name {  get; set; }   
 
-    public List<Item> Items { get; set; }
+    public List<Item> Items { get; set; } = new List<Item>();
 
-    public List<User> Users { get; set; }
+    public User User { get; set; }
 
 }
 
