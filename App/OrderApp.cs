@@ -37,12 +37,13 @@ namespace App
                     return true;
                 }
 
-                Console.WriteLine("Введите id предметов через пробел");
+                Console.WriteLine("Введите id предметов");
+                Console.WriteLine("Для завершения добавления предметов введите end");
                 List<int> itemsIds = new List<int>();
                 while (true)
                 {
                     string str = Console.ReadLine();
-                    if(str == "end")
+                    if (str == "end")
                     {
                         break;
                     }
@@ -54,6 +55,34 @@ namespace App
                 var orderCreate = new OrderCreate(name, itemsIds, userId);
                 var id = _orderHandler.CreateOrder(orderCreate);
                 Console.WriteLine("Заказ создан c id " + id);
+                return true;
+            }
+            else if (action == "order get")
+            {
+                var orders = _orderHandler.GetAll();
+                if (orders == null || orders.Count == 0)
+                {
+                    Console.WriteLine("Заказов нет");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    foreach (var order in orders)
+                    {
+                        Console.WriteLine($"Id: {order.Id}, Имя: {order.Name}");
+                    }
+                }
+                return true;
+            }
+            else if (action == "order delete")
+            {
+                Console.WriteLine("Введите Id");
+                var id = int.Parse(Console.ReadLine());
+
+                var orderDelete = new OrderDelete(id);
+
+                _orderHandler.DeleteOrder(orderDelete);
+                Console.WriteLine("Заказ успешно удален");
                 return true;
             }
             return false;

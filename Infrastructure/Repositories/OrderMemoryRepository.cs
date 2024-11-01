@@ -21,4 +21,9 @@ public class OrderMemoryRepository : IOrderRepository
     {
         return _context.Orders;
     }
+    public void Remove(Order order)
+    {
+        _context.Orders.Remove(order);
+        _context.SaveChanges();
+    }
 }

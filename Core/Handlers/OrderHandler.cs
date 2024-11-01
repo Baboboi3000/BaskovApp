@@ -2,6 +2,7 @@
 
 public record OrderCreate(string Name, List<int> ItemsIds, int UserId);
 public record OrderOutput(int Id, string Name);
+public record OrderDelete(int Id);
 public class OrderHandler
 {
     private readonly IOrderRepository _orderRepository;
@@ -58,5 +59,14 @@ public class OrderHandler
         var orders = _orderRepository.GetAll();
 
         return orders.Select(order => new OrderOutput(order.Id, order.Name)).ToList();
+    }
+    //удаление заказа
+    public void DeleteOrder(OrderDelete orderDelete)
+    {
+        var order = new Order
+        {
+            Id = orderDelete.Id,
+        };
+        _orderRepository.Remove(order);
     }
 }

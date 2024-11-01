@@ -21,6 +21,16 @@ var item2 = new Item
 };
 var equal3 = item1.Equals(item2);
 var equal4 = item1 == item2;
+var order1 = new Order
+{
+    Id = 1,
+};
+var order2 = new Order
+{
+    Id = 2,
+};
+var equal5 = order1.Equals(order2);
+var equal6 = order1 == order2;
 
 Console.WriteLine("Пользователи - users");
 Console.WriteLine("Создать пользователя - create");
@@ -33,6 +43,8 @@ Console.WriteLine("Удалить предмет - delete");
 Console.WriteLine("Добавить предмет к пользователю - add users");
 Console.WriteLine("Заказы - order");
 Console.WriteLine("Создать заказ - add");
+Console.WriteLine("Получить все заказы - get");
+Console.WriteLine("Удалить заказ - delete");
 var userApp = new UsersApp();
 var itemApp = new ItemsApp();
 var orderApp = new OrderApp();
