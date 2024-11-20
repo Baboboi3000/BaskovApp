@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace Core.Handlers;
+﻿namespace Core.Handlers;
 
 public record UserInput(string Name, int Age);
 public record UserOutput(int Id, string Name, int Age, DateTime Created);

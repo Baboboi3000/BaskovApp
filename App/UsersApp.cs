@@ -1,7 +1,7 @@
 ﻿
 namespace App
 {
-    public class UsersApp  
+    public class UsersApp
     {
         JsonContext _memoryContext;
 
@@ -10,48 +10,55 @@ namespace App
         UserHandler _userHandler;
         public UsersApp()
         {
-            _memoryContext = new JsonContext();
+            _memoryContext =  JsonContext.GetInstance();
             _userRepository = new UserMemoryRepository(_memoryContext);
             _userHandler = new(_userRepository);
         }
-        public bool Pipisa(string action)
+        public bool Handle(string action)
         {
-           
-            while (true)
+
+
+            if (action == "users get")
             {
-               
-                if (action == "users get")
+                var users = _userHandler.GetAll();
+                if (users == null || users.Count == 0)
                 {
-                    var user = _userHandler.GetAll();
-                    if (user == null || user.Count == 0)
+                    Console.WriteLine("Пользователей нет");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    foreach (var user in users)
                     {
-                        Console.WriteLine("Пользователей нет");
-                        Console.WriteLine();
-                        continue;
+                        Console.WriteLine($"Id: {user.Id}, Имя: {user.Name}, Возраст {user.Age}, Время создания: {user.Created}");
                     }
-                    
                 }
-                else if (action == "users create")
-                {
-                    Console.WriteLine("Введите имя и возраст");
-                    var name = Console.ReadLine();
-                    var age = int.Parse(Console.ReadLine());
-
-                    var userInput = new UserInput(name, age);
-
-                    _userHandler.AddUser(userInput);
-                }
-                else if (action == "users delete")
-                {
-                    Console.WriteLine("Введите Id");
-                    var id = int.Parse(Console.ReadLine());
-
-                    var userDelete = new UserDelete(id);
-
-                    _userHandler.DeleteUser(userDelete);
-                }
-                
+                return true;
             }
+            else if (action == "users create")
+            {
+                Console.WriteLine("Введите имя и возраст");
+                var name = Console.ReadLine();
+                var age = int.Parse(Console.ReadLine());
+
+                var userInput = new UserInput(name, age);
+
+                _userHandler.AddUser(userInput);
+                Console.WriteLine("Пользователь успешно создан");
+                return true;
+            }
+            else if (action == "users delete")
+            {
+                Console.WriteLine("Введите Id");
+                var id = int.Parse(Console.ReadLine());
+
+                var userDelete = new UserDelete(id);
+
+                _userHandler.DeleteUser(userDelete);
+                Console.WriteLine("Пользователь успешно удален");
+                return true;
+            }
+            return false;
         }
     }
 }
